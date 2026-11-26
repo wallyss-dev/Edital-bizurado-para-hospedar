@@ -1,0 +1,283 @@
+
+/* Página de planos e assinatura */
+
+.pagina-planos {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabeçalho */
+
+.marca-link {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.planos-main {
+  flex: 1;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+/* Apresentação */
+
+.planos-intro {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.planos-intro h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.1;
+  max-width: 750px;
+}
+
+.planos-intro .lead {
+  max-width: 560px;
+}
+
+/* Área da assinatura */
+
+.planos-area {
+  display: flex;
+  justify-content: center;
+}
+
+.plano-card {
+  width: 100%;
+  max-width: 440px;
+  display: grid;
+  gap: 18px;
+  padding: 30px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-top: 5px solid var(--marker);
+  border-radius: 8px;
+}
+
+/* Identificação do plano */
+
+.plano-cab {
+  display: grid;
+  gap: 10px;
+}
+
+.plano-selo {
+  width: fit-content;
+  padding: 4px 9px;
+  border-radius: 3px;
+  background: var(--marker);
+  color: var(--marker-ink);
+  font: 600 11px var(--font-mono);
+  letter-spacing: .06em;
+}
+
+.plano-cab h2 {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.plano-cab p {
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+/* Preço */
+
+.plano-preco {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.plano-moeda {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.plano-preco strong {
+  font-family: var(--font-display);
+  font-size: clamp(46px, 8vw, 64px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.plano-periodo {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.plano-cobranca {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  margin-top: -10px;
+}
+
+.plano-divisor {
+  height: 1px;
+  background: var(--line);
+}
+
+.plano-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Benefícios */
+
+.plano-beneficios {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.plano-beneficios li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.plano-beneficios li::before {
+  content: "\2713";
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--ok-bg);
+  color: var(--ok);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Botão de assinatura */
+
+.plano-assinar {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.plano-assinar:disabled {
+  opacity: .75;
+  cursor: not-allowed;
+}
+
+.plano-assinar:disabled:hover {
+  filter: none;
+}
+
+.plano-nota {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+/* Frase institucional */
+
+.planos-frase {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+  padding-top: 44px;
+}
+
+.planos-frase h2 {
+  font-size: clamp(20px, 4vw, 26px);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.planos-frase p {
+  max-width: 500px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+/* Rodapé */
+
+.planos-footer {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding-block: 18px;
+}
+
+.planos-footer .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.planos-footer p {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* Responsividade */
+
+@media (max-width: 640px) {
+  .planos-main {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .planos-intro {
+    margin-bottom: 26px;
+  }
+
+  .plano-card {
+    padding: 22px;
+  }
+
+  .planos-frase {
+    padding-top: 32px;
+  }
+
+  .planos-footer .wrap {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Barra de rolagem da página */
+
+html:has(.pagina-planos) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) var(--paper);
+}
+
+html:has(.pagina-planos)::-webkit-scrollbar {
+  width: 8px;
+}
+
+html:has(.pagina-planos)::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+html:has(.pagina-planos)::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+
+html:has(.pagina-planos)::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-2);
+}

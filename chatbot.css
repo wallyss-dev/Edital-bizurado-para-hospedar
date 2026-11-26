@@ -1,0 +1,112 @@
+/* ==========================================================
+   Bizu — chatbot do Edital Bizurado
+   Usa apenas as variáveis de style.css (tema claro/escuro herdado).
+   ========================================================== */
+
+.bz-root { position: fixed; right: 20px; bottom: 20px; z-index: 1000; font-family: var(--font-body); color: var(--ink); }
+.bz-root *, .bz-root *::before, .bz-root *::after { box-sizing: border-box; }
+.bz-root button, .bz-root input { font: inherit; color: inherit; }
+.bz-root :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Botão flutuante: o marca-texto é o gesto de marca */
+.bz-launcher {
+  display: flex; align-items: center; gap: 10px; padding: 12px 18px 12px 14px;
+  background: var(--marker); color: var(--marker-ink); border: 1.5px solid var(--marker-ink);
+  border-radius: 999px; cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: .95rem;
+  box-shadow: 3px 3px 0 var(--marker-ink); transition: transform .15s, box-shadow .15s;
+}
+.bz-launcher:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--marker-ink); }
+.bz-launcher svg { width: 20px; height: 20px; }
+.bz-root.is-open .bz-launcher { display: none; }
+
+/* Painel */
+.bz-panel {
+  display: none; flex-direction: column; width: 400px; height: min(640px, calc(100vh - 40px));
+  background: var(--paper); border: 1px solid var(--line-2); border-radius: 14px; overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .22);
+}
+.bz-root.is-open .bz-panel { display: flex; animation: bz-in .18s ease-out; }
+@keyframes bz-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Cabeçalho */
+.bz-head { display: flex; align-items: flex-start; gap: 10px; padding: 14px 14px 10px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.bz-id { flex: 1; min-width: 0; }
+.bz-name { margin: 0; font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; line-height: 1.2; }
+.bz-name span { background: linear-gradient(transparent 55%, var(--marker) 55%); padding: 0 2px; }
+.bz-sub { margin: 4px 0 0; font-size: .78rem; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.bz-demo { background: var(--info-bg); color: var(--info); border-radius: 4px; padding: 1px 7px; font-weight: 600; }
+.bz-ibtn { background: transparent; border: 1px solid var(--line-2); border-radius: 8px; padding: 6px 9px; font-size: .78rem; cursor: pointer; color: var(--ink-2); }
+.bz-ibtn:hover { background: var(--paper); color: var(--ink); }
+.bz-ibtn.bz-x { font-size: 1rem; line-height: 1; padding: 5px 9px; }
+
+/* Etapas */
+.bz-steps { display: flex; gap: 4px; padding: 8px 14px; background: var(--surface); border-bottom: 1px solid var(--line); list-style: none; margin: 0; }
+.bz-steps li { flex: 1; min-width: 0; font-size: .68rem; color: var(--ink-2); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-top: 6px; border-top: 3px solid var(--line-2); }
+.bz-steps li.done { border-top-color: var(--ink-2); }
+.bz-steps li.now { border-top-color: var(--marker); color: var(--ink); font-weight: 700; box-shadow: inset 0 3px 0 var(--marker-ink); border-top-color: var(--marker-ink); }
+
+/* Menu de casos de limite */
+.bz-test { display: none; position: absolute; right: 12px; top: 58px; width: min(320px, calc(100% - 24px)); background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px; padding: 6px; z-index: 5; box-shadow: 0 10px 30px rgba(0, 0, 0, .2); }
+.bz-test.on { display: block; }
+.bz-test p { margin: 6px 8px; font-size: .75rem; color: var(--ink-2); }
+.bz-test button { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 8px; border-radius: 6px; cursor: pointer; font-size: .85rem; }
+.bz-test button:hover { background: var(--marker); color: var(--marker-ink); }
+.bz-test small { display: block; color: var(--ink-2); font-size: .72rem; }
+.bz-test button:hover small { color: var(--marker-ink); }
+
+/* Mensagens */
+.bz-log { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
+.bz-msg { max-width: 88%; padding: 9px 12px; border-radius: 12px; font-size: .92rem; line-height: 1.5; overflow-wrap: anywhere; }
+.bz-msg p { margin: 0 0 6px; } .bz-msg p:last-child { margin: 0; }
+.bz-msg ul { margin: 4px 0 6px; padding-left: 18px; }
+.bz-bot { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); border-top-left-radius: 3px; }
+.bz-user { align-self: flex-end; background: var(--btn-bg); color: var(--btn-fg); border-top-right-radius: 3px; white-space: pre-wrap; }
+.bz-err { border-color: var(--stamp); background: var(--stamp-bg); color: var(--stamp); }
+
+/* Selos e notas de classificação */
+.bz-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.bz-badge { font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--line); color: var(--ink-2); }
+.bz-badge.alta { background: var(--stamp-bg); color: var(--stamp); border: 1px solid var(--stamp); }
+.bz-badge.info { background: var(--info-bg); color: var(--info); }
+.bz-note { margin: 6px 0 0; font-size: .8rem; color: var(--ink-2); border-left: 3px solid var(--marker-ink); padding-left: 8px; }
+
+/* Chips */
+.bz-chips { display: flex; flex-wrap: wrap; gap: 6px; align-self: flex-start; max-width: 100%; }
+.bz-chip { background: var(--paper); border: 1px solid var(--line-2); border-radius: 999px; padding: 6px 12px; font-size: .84rem; cursor: pointer; text-align: left; }
+.bz-chip:hover { background: var(--marker); color: var(--marker-ink); border-color: var(--marker-ink); }
+.bz-chip.ghost { color: var(--ink-2); border-style: dashed; }
+.bz-sugs { display: none; gap: 6px; padding: 8px 14px 0; overflow-x: auto; flex-shrink: 0; }
+.bz-sugs.on { display: flex; }
+.bz-sugs .bz-chip { white-space: nowrap; font-size: .78rem; }
+
+/* Card de classificação */
+.bz-card { align-self: stretch; background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px; padding: 12px; font-size: .88rem; }
+.bz-card.alta { border-color: var(--stamp); background: var(--stamp-bg); }
+.bz-card h3 { margin: 0 0 8px; font-family: var(--font-display); font-size: 1rem; }
+.bz-card dl { margin: 0 0 10px; display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; }
+.bz-card dt { color: var(--ink-2); } .bz-card dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.bz-card .bz-go { margin-top: 10px; width: 100%; padding: 9px; border-radius: 8px; border: 0; cursor: pointer; font-weight: 700; background: var(--btn-bg); color: var(--btn-fg); }
+
+/* Digitando */
+.bz-typing { align-self: flex-start; font-size: .82rem; color: var(--ink-2); display: flex; align-items: center; gap: 8px; }
+.bz-dots span { display: inline-block; width: 5px; height: 5px; margin-right: 2px; border-radius: 50%; background: var(--ink-2); animation: bz-b 1s infinite; }
+.bz-dots span:nth-child(2) { animation-delay: .15s; } .bz-dots span:nth-child(3) { animation-delay: .3s; }
+@keyframes bz-b { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+
+/* Compositor */
+.bz-form { display: flex; gap: 8px; padding: 10px 14px 14px; }
+.bz-input { flex: 1; min-width: 0; padding: 10px 12px; background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px; font-size: 16px; }
+.bz-send { padding: 0 16px; border: 0; border-radius: 10px; cursor: pointer; font-weight: 700; background: var(--btn-bg); color: var(--btn-fg); }
+.bz-send:disabled, .bz-input:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Mobile: folha cobrindo a tela */
+@media (max-width: 640px) {
+  .bz-root { right: 14px; bottom: 14px; }
+  .bz-root.is-open { inset: 0; right: 0; bottom: 0; }
+  .bz-panel { width: 100%; height: 100%; border-radius: 0; border: 0; }
+  .bz-msg { max-width: 92%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bz-root.is-open .bz-panel, .bz-dots span { animation: none; }
+  .bz-log { scroll-behavior: auto; } .bz-launcher { transition: none; }
+}
